@@ -161,7 +161,7 @@ Para ampliar a base, adicione linhas preservando o cabeçalho, a codificação U
 ### Linux ou macOS
 
 ~~~bash
-git clone https://github.com/SEU_USUARIO/educarag-oci.git
+git clone https://github.com/willdmx/educarag-oci.git
 cd educarag-oci
 python3 -m venv .venv
 source .venv/bin/activate
@@ -172,15 +172,13 @@ pip install -r requirements.txt
 ### Windows PowerShell
 
 ~~~powershell
-git clone https://github.com/SEU_USUARIO/educarag-oci.git
+git clone https://github.com/willdmx/educarag-oci.git
 Set-Location educarag-oci
 py -3 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ~~~
-
-Substitua <code>SEU_USUARIO</code> pelo proprietário real do repositório quando ele for publicado.
 
 ## 14. Como executar localmente
 
@@ -253,7 +251,7 @@ As etapas abaixo são genéricas para uma VM Ubuntu com acesso por SSH. Os nomes
 ~~~bash
 sudo apt update
 sudo apt install -y git python3 python3-venv python3-pip
-git clone https://github.com/SEU_USUARIO/educarag-oci.git
+git clone https://github.com/willdmx/educarag-oci.git
 cd educarag-oci
 python3 -m venv .venv
 source .venv/bin/activate
