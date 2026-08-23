@@ -1,0 +1,29 @@
+# Variáveis de ambiente e ambientes virtuais
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Streamlit
+.streamlit/
+
+# IDEs e sistema operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Artefatos de empacotamento
+build/
+dist/
+*.egg-info/
