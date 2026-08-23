@@ -1,6 +1,6 @@
 # 1. EducaRAG OCI
 
-Agente inteligente de suporte educacional com RAG e Oracle Cloud Infrastructure.
+Agente inteligente de suporte educacional com RAG e integração opcional com OCI Generative AI.
 
 O **EducaRAG OCI** é uma demonstração acadêmica de Retrieval-Augmented Generation (RAG) em Python. A aplicação recebe perguntas em português, consulta exclusivamente uma base de conhecimento fictícia em CSV e, quando configurada, usa um endpoint OpenAI-compatible do OCI Generative AI para redigir uma resposta fundamentada no contexto recuperado.
 
@@ -26,9 +26,9 @@ O contexto recuperado pode seguir por dois caminhos:
 
 ## Demo pública
 
-A demonstração pública está disponível em [https://educarag-oci.streamlit.app](https://educarag-oci.streamlit.app).
+A aplicação está publicada no **Streamlit Community Cloud** e disponível em [https://educarag-oci.streamlit.app](https://educarag-oci.streamlit.app).
 
-A demo pública atual está hospedada no **Streamlit Community Cloud**. O deploy público apresentado aqui não foi realizado na OCI. A arquitetura do projeto está preparada para integração e implantação na Oracle Cloud Infrastructure, mas o deploy na OCI depende do provisionamento e da configuração de uma conta Oracle Cloud.
+O uso da OCI não é obrigatório neste Challenge. A arquitetura suporta OCI Generative AI como integração opcional, e as instruções de deploy em uma VM Ubuntu na OCI apresentam apenas uma alternativa de implantação.
 
 ![Evidência da demo pública do EducaRAG OCI no Streamlit Community Cloud](docs/evidencias/02-deploy-publico-streamlit.png)
 
@@ -45,11 +45,11 @@ O EducaRAG OCI oferece uma solução pequena e auditável:
 1. mantém o conhecimento em um CSV versionável;
 2. utiliza recuperação lexical com TF-IDF e similaridade de cosseno;
 3. limita o contexto aos três registros mais relevantes;
-4. solicita ao modelo que responda apenas com base nesse contexto;
+4. quando OCI Generative AI está configurado, solicita ao modelo que responda apenas com base nesse contexto;
 5. preserva a funcionalidade essencial por meio de fallback local;
 6. expõe resposta, fontes e categorias na interface.
 
-Essa abordagem reduz dependências operacionais e facilita a execução em uma VM Ubuntu.
+Essa abordagem reduz dependências operacionais e facilita a execução local, no Streamlit Community Cloud ou, opcionalmente, em uma VM Ubuntu na OCI.
 
 ## 6. Funcionalidades
 
@@ -132,7 +132,9 @@ educarag-oci/
 │   └── base_conhecimento.csv
 ├── docs/
 │   └── evidencias/
-│       └── .gitkeep
+│       ├── .gitkeep
+│       ├── 01-agente-local.png
+│       └── 02-deploy-publico-streamlit.png
 ├── src/
 │   ├── __init__.py
 │   ├── llm.py
@@ -200,9 +202,9 @@ O Streamlit normalmente informa no terminal o endereço local de acesso, como <c
 
 O arquivo <code>.env</code> não é obrigatório. Sem as quatro variáveis OCI preenchidas, a interface deve indicar **Modo de recuperação local** e continuar respondendo a partir do CSV.
 
-## 15. Configuração das variáveis OCI
+## 15. Configuração opcional das variáveis OCI
 
-Crie o arquivo local de configuração a partir do modelo:
+Para ativar opcionalmente o OCI Generative AI, crie o arquivo local de configuração a partir do modelo:
 
 ~~~bash
 cp .env.example .env
@@ -232,11 +234,11 @@ OCI_GENAI_MODEL=
 
 Não copie valores de exemplo de outro ambiente. Use os dados exibidos para o seu próprio projeto e região. O arquivo <code>.env</code> está ignorado pelo Git.
 
-## 16. Integração com OCI Generative AI
+## 16. Integração opcional com OCI Generative AI
 
 O módulo <code>src/llm.py</code> usa o SDK Python da OpenAI como cliente de um endpoint compatível. A integração é opcional e foi isolada da camada de recuperação.
 
-Antes de configurar o modo generativo, crie um projeto do OCI Generative AI, gere uma API key na mesma região do modelo, conceda as permissões necessárias e selecione um modelo/região que suporte <code>/chat/completions</code>. Consulte a documentação oficial sobre [uso de projetos](https://docs.oracle.com/en-us/iaas/Content/generative-ai/use-project.htm) e a [API Chat Completions da OCI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/chat-completions-api.htm).
+Se optar pelo modo generativo, crie um projeto do OCI Generative AI, gere uma API key na mesma região do modelo, conceda as permissões necessárias e selecione um modelo/região que suporte <code>/chat/completions</code>. Consulte a documentação oficial sobre [uso de projetos](https://docs.oracle.com/en-us/iaas/Content/generative-ai/use-project.htm) e a [API Chat Completions da OCI](https://docs.oracle.com/en-us/iaas/Content/generative-ai/chat-completions-api.htm).
 
 Com todas as variáveis válidas, o fluxo esperado é:
 
@@ -250,9 +252,9 @@ Se faltar configuração, a chamada generativa é ignorada. Se o endpoint falhar
 
 Endpoints, cabeçalhos e identificadores podem variar conforme a configuração disponibilizada na OCI. Compare <code>src/llm.py</code> com o trecho **How to use** exibido no seu projeto OCI Generative AI e adapte somente os parâmetros necessários. Esta documentação é genérica e não substitui a documentação aplicável à sua conta.
 
-## 17. Deploy em VM Ubuntu na OCI
+## 17. Alternativa de deploy em VM Ubuntu na OCI
 
-As etapas abaixo são genéricas para uma VM Ubuntu com acesso por SSH. Os nomes, endereços e regras de rede dependem do ambiente do responsável pelo deploy.
+As etapas abaixo documentam uma alternativa opcional à hospedagem atual no Streamlit Community Cloud. Elas não são necessárias para executar a demonstração pública ou participar do Challenge. Os nomes, endereços e regras de rede dependem do ambiente escolhido para essa alternativa.
 
 ### 17.1 Preparar a VM
 
@@ -267,7 +269,9 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ~~~
 
-### 17.2 Configurar o ambiente
+### 17.2 Configurar OCI Generative AI na VM (opcional)
+
+Esta etapa só é necessária caso a integração com OCI Generative AI seja utilizada. Para executar no modo de recuperação local, ignore toda esta subseção; não é necessário criar um arquivo <code>.env</code>.
 
 ~~~bash
 cp .env.example .env
@@ -280,15 +284,13 @@ Preencha os valores apenas se utilizar OCI Generative AI. Proteja o arquivo para
 chmod 600 .env
 ~~~
 
-Também é válido manter todas as variáveis vazias para executar no modo local.
-
 ### 17.3 Iniciar a aplicação
 
 ~~~bash
 streamlit run app.py --server.address 0.0.0.0 --server.port 8501
 ~~~
 
-O processo permanece associado à sessão do terminal. Para uma publicação persistente, configure posteriormente um gerenciador de serviços, como <code>systemd</code>, com usuário sem privilégios e diretório de trabalho explícito.
+Na alternativa de VM, o processo permanece associado à sessão do terminal; um gerenciador de serviços, como <code>systemd</code>, pode ser usado para execução contínua. No Streamlit Community Cloud, o processo da aplicação é gerenciado pela própria plataforma.
 
 ### 17.4 Rede e acesso
 
@@ -327,16 +329,12 @@ No modo local, espera-se uma resposta diretamente baseada no registro mais relev
 
 ## 20. Evidências
 
-O diretório <code>docs/evidencias/</code> foi reservado para materiais de validação. Sugestões:
+O diretório <code>docs/evidencias/</code> reúne as evidências atuais do projeto:
 
-- tela inicial com o indicador do modo ativo;
-- execução das cinco perguntas de exemplo;
-- resposta com fontes e categorias;
-- funcionamento sem variáveis OCI;
-- funcionamento com OCI, quando houver ambiente autorizado;
-- terminal com instalação e inicialização concluídas.
+- <code>01-agente-local.png</code>: execução do agente no modo de recuperação local;
+- <code>02-deploy-publico-streamlit.png</code>: demonstração publicada no Streamlit Community Cloud.
 
-Use nomes descritivos, por exemplo <code>01-modo-local.png</code> e <code>02-certificado.png</code>. Antes de publicar uma evidência, remova chaves, identificadores sensíveis, endereços privados, nomes pessoais e demais dados que não devam ser públicos. O arquivo <code>.gitkeep</code> apenas mantém a pasta vazia sob controle de versão.
+Antes de publicar novas evidências, remova chaves, identificadores sensíveis, endereços privados, nomes pessoais e demais dados que não devam ser públicos. O arquivo <code>.gitkeep</code> preserva a estrutura do diretório no repositório.
 
 ## 21. Limitações
 
@@ -366,6 +364,7 @@ Use nomes descritivos, por exemplo <code>01-modo-local.png</code> e <code>02-cer
 
 - nunca grave credenciais no código, no CSV ou no README;
 - mantenha <code>.env</code> fora do Git e restrinja suas permissões;
+- no Streamlit Community Cloud, configure eventuais segredos nas configurações privadas da aplicação, nunca no repositório;
 - revogue imediatamente qualquer segredo exposto;
 - use credenciais com menor privilégio e prazo de vida adequados ao ambiente;
 - não registre prompts, respostas ou identificadores se puderem conter dados sensíveis;
@@ -383,4 +382,4 @@ Projeto acadêmico desenvolvido para o **Challenge Alura Agente - Oracle Next Ed
 
 Todo o conteúdo da plataforma EducaRAG e de sua base de conhecimento é fictício e foi criado exclusivamente para demonstração. O repositório não é um produto oficial e não implica parceria, suporte ou endosso da Alura, da Oracle ou de qualquer terceiro.
 
-Nenhuma licença de reutilização foi definida neste escopo. Antes da publicação, o responsável pelo repositório deve adicionar um arquivo <code>LICENSE</code> caso deseje conceder permissões explícitas de uso, cópia ou modificação.
+Este repositório não possui um arquivo <code>LICENSE</code>; seu conteúdo é apresentado para fins acadêmicos.

@@ -147,8 +147,8 @@ def _render_result(result: dict[str, Any]) -> None:
 def main() -> None:
     st.title("EducaRAG OCI")
     st.markdown(
-        "Agente inteligente de suporte educacional com RAG e Oracle Cloud "
-        "Infrastructure."
+        "Agente inteligente de suporte educacional com RAG e integração opcional "
+        "com OCI Generative AI."
     )
     st.caption(
         "As respostas usam exclusivamente a base de conhecimento fictícia do projeto."
