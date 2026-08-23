@@ -373,7 +373,7 @@ O fallback local não elimina a necessidade de proteger o host e a base de conhe
 
 ## 24. Licença e projeto acadêmico
 
-Projeto acadêmico desenvolvido para o **Challenge Alura Agente — Oracle Next Education**.
+Projeto acadêmico desenvolvido para o **Challenge Alura Agente - Oracle Next Education.**
 
 Todo o conteúdo da plataforma EducaRAG e de sua base de conhecimento é fictício e foi criado exclusivamente para demonstração. O repositório não é um produto oficial e não implica parceria, suporte ou endosso da Alura, da Oracle ou de qualquer terceiro.
 

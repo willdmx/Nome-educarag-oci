@@ -164,7 +164,7 @@ def main() -> None:
 
     st.sidebar.divider()
     st.sidebar.markdown(
-        "**Projeto acadêmico desenvolvido para o Challenge Alura Agente — "
+        "**Projeto acadêmico desenvolvido para o Challenge Alura Agente - "
         "Oracle Next Education.**"
     )
 
@@ -211,7 +211,7 @@ def main() -> None:
 
     st.divider()
     st.caption(
-        "Projeto acadêmico desenvolvido para o Challenge Alura Agente — "
+        "Projeto acadêmico desenvolvido para o Challenge Alura Agente - "
         "Oracle Next Education."
     )
 
