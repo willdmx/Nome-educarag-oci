@@ -24,6 +24,14 @@ O contexto recuperado pode seguir por dois caminhos:
 - **OCI Generative AI:** o modelo recebe a pergunta e somente o contexto selecionado, com instruções para não inventar informações.
 - **Modo de recuperação local:** quando a integração OCI não está configurada ou não está disponível, a aplicação apresenta a resposta recuperada diretamente do CSV, sem interromper o uso.
 
+## Demo pública
+
+A demonstração pública está disponível em [https://educarag-oci.streamlit.app](https://educarag-oci.streamlit.app).
+
+A demo pública atual está hospedada no **Streamlit Community Cloud**. O deploy público apresentado aqui não foi realizado na OCI. A arquitetura do projeto está preparada para integração e implantação na Oracle Cloud Infrastructure, mas o deploy na OCI depende do provisionamento e da configuração de uma conta Oracle Cloud.
+
+![Evidência da demo pública do EducaRAG OCI no Streamlit Community Cloud](docs/evidencias/02-deploy-publico-streamlit.png)
+
 ## 4. Problema
 
 Plataformas educacionais concentram dúvidas recorrentes sobre acesso, matrículas, certificados, pagamentos e suporte. Procurar manualmente cada orientação aumenta o tempo de atendimento e pode produzir respostas inconsistentes.
