@@ -28,7 +28,7 @@ O contexto recuperado pode seguir por dois caminhos:
 
 A aplicação está publicada no **Streamlit Community Cloud** e disponível em [https://educarag-oci.streamlit.app](https://educarag-oci.streamlit.app).
 
-O uso da OCI não é obrigatório neste Challenge. A arquitetura suporta OCI Generative AI como integração opcional, e as instruções de deploy em uma VM Ubuntu na OCI apresentam apenas uma alternativa de implantação.
+A arquitetura foi projetada para permitir integração opcional com o OCI Generative AI. A demonstração pública está hospedada no Streamlit Community Cloud, enquanto o README também documenta a implantação em uma VM Ubuntu na OCI como alternativa de infraestrutura.
 
 ![Evidência da demo pública do EducaRAG OCI no Streamlit Community Cloud](docs/evidencias/02-deploy-publico-streamlit.png)
 
